@@ -1,5 +1,6 @@
 import "../../App.css";
 import { Button, Checkbox, Input, Typography } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 export default function page() {
   return (
@@ -35,7 +36,9 @@ export default function page() {
               containerProps={{ className: "-ml-2.5" }}
             />
             <Button className="bg-primary" fullWidth>
-              Login
+              <Link to="/menu" className="text-white">
+                Login
+              </Link>
             </Button>
           </form>
         </div>
