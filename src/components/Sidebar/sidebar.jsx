@@ -10,11 +10,11 @@ import {
   ClockIcon,
 } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
-import "../App.css";
+import "../../App.css";
 
 export default function Sidebar() {
   return (
-    <Card className="h-[100vh] w-[100%] p-4 shadow-xl shadow-blue-gray-900/5">
+    <Card className="h-[100%] w-[100%] p-4 shadow-xl shadow-blue-gray-900/5">
       <div className="mb-10 p-4 w-[180px] h-[60px]">
         <img src="./img/logo.svg" alt="" draggable="false" />
       </div>
