@@ -7,33 +7,35 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import CardContainer from "../../components/Card/CardContainer";
+// import { useParams } from "react-router-dom";
 
 export default function TabsComp() {
+
   const [activeTab, setActiveTab] = useState("html");
   const data = [
     {
-      label: "HTML",
-      value: "html",
+      label: "Main Meals",
+      value: "mainmeals",
       item: <CardContainer />,
     },
     {
-      label: "React",
-      value: "react",
+      label: "Appetizers",
+      value: "appetizers",
       item: <CardContainer />,
     },
     {
-      label: "Vue",
-      value: "vue",
+      label: "Desserts",
+      value: "desserts",
       item: <CardContainer />,
     },
     {
-      label: "Angular",
-      value: "angular",
+      label: "Dirinks",
+      value: "dirinks",
       item: <CardContainer />,
     },
     {
-      label: "Svelte",
-      value: "svelte",
+      label: "Alcohol",
+      value: "alcohol",
       item: <CardContainer />,
     },
   ];
