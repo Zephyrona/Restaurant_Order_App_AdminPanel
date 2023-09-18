@@ -7,11 +7,10 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import CardContainer from "../../components/Card/CardContainer";
-// import { useParams } from "react-router-dom";
 
 export default function TabsComp() {
 
-  const [activeTab, setActiveTab] = useState("html");
+  const [activeTab, setActiveTab] = useState("mainmeals");
   const data = [
     {
       label: "Main Meals",

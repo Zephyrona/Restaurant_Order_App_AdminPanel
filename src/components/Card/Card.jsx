@@ -64,12 +64,8 @@ export default function Cards() {
           </CardHeader>
           <CardBody>
             <div className="mb-2 flex items-center justify-between">
-              <Typography color="blueGray" className="font-medium">
-                {label}
-              </Typography>
-              <Typography color="blueGray" className="font-medium">
-                {price}
-              </Typography>
+              <Typography className="font-medium">{label}</Typography>
+              <Typography className="font-medium">{price}</Typography>
             </div>
             <Typography
               variant="small"
