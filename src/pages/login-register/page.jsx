@@ -36,9 +36,7 @@ export default function page() {
               containerProps={{ className: "-ml-2.5" }}
             />
             <Button className="bg-primary" fullWidth>
-              <Link to="/menu" className="text-white">
-                Login
-              </Link>
+              <Link to="/chef ">Login</Link>
             </Button>
           </form>
         </div>

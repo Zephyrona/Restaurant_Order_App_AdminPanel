@@ -1,4 +1,14 @@
-import { Card, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
+import { useState } from "react";
+import {
+  Card,
+  List,
+  ListItem,
+  ListItemPrefix,
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+  Typography,
+} from "@material-tailwind/react";
 import {
   UserIcon,
   Cog6ToothIcon,
@@ -6,17 +16,25 @@ import {
   Squares2X2Icon,
   ClipboardDocumentIcon,
   ArrowRightOnRectangleIcon,
-  RectangleStackIcon,
   ClockIcon,
+  ChevronDownIcon,
+  RectangleStackIcon,
 } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 import "../../App.css";
+import { Icon } from "@iconify/react";
 
 export default function Sidebar() {
+  const [open, setOpen] = useState(0);
+
+  const handleOpen = (value) => {
+    setOpen(open === value ? 0 : value);
+  };
+
   return (
     <Card className="h-[100%] w-[100%] p-4 shadow-xl shadow-blue-gray-900/5">
       <div className="mb-10 p-4 w-[180px] h-[60px]">
-        <img src="./img/logo.svg" alt="" draggable="false" />
+        <img src="../img/logo.svg" alt="" draggable="false" />
       </div>
       <List className="">
         <NavLink to="/">
@@ -51,14 +69,51 @@ export default function Sidebar() {
             Chef
           </ListItem>
         </NavLink>
-        <NavLink to="/products">
-          <ListItem className="focus:bg-transparent focus:text-white">
-            <ListItemPrefix>
-              <RectangleStackIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            New Products
+        <Accordion
+          open={open === 1}
+          icon={
+            <ChevronDownIcon
+              strokeWidth={2.5}
+              className={`mx-auto h-4 w-4 transition-transform ${
+                open === 1 ? "rotate-180" : ""
+              }`}
+            />
+          }
+        >
+          <ListItem className="p-0" selected={open === 1}>
+            <AccordionHeader
+              onClick={() => handleOpen(1)}
+              className="border-b-0 p-3"
+            >
+              <ListItemPrefix>
+                <RectangleStackIcon className="h-5 w-5" />
+              </ListItemPrefix>
+              <Typography color="blue-gray" className="mr-auto font-normal">
+                Products
+              </Typography>
+            </AccordionHeader>
           </ListItem>
-        </NavLink>
+          <AccordionBody className="py-1">
+            <List className="pl-[20px]">
+              <NavLink to="/products/item">
+                <ListItem className="focus:bg-transparent focus:text-white">
+                  <ListItemPrefix>
+                    <Icon icon="material-symbols:place-item-rounded" />
+                  </ListItemPrefix>
+                  New Item
+                </ListItem>
+              </NavLink>
+              <NavLink to="/products/category">
+                <ListItem className="focus:bg-transparent focus:text-white">
+                  <ListItemPrefix>
+                    <Icon icon="bx:category" />
+                  </ListItemPrefix>
+                  New Category
+                </ListItem>
+              </NavLink>
+            </List>
+          </AccordionBody>
+        </Accordion>
         <NavLink to="/reservation">
           <ListItem className="focus:bg-transparent focus:text-white">
             <ListItemPrefix>

@@ -10,6 +10,7 @@ import Reservation from "./pages/reservation/reservation";
 import Settings from "./pages/settings/settings";
 import Waiter from "./pages/waiter/waiter";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
+import Category from "./pages/newproducts/category";
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/waiter" element={<Waiter />} />
           <Route path="/chef" element={<Chef />} />
-          <Route path="/products" element={<Products />} />
+          <Route path="/products/item" element={<Products />} />
+          <Route path="/products/category" element={<Category />} />
           <Route path="/reservation" element={<Reservation />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>

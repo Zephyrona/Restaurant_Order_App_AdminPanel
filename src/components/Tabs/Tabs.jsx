@@ -6,40 +6,36 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import CardContainer from "../../components/Card/CardContainer";
+import CardContainer from "../Card/CardContainer"; // Import CardContainer from your file
 
 export default function TabsComp() {
-
   const [activeTab, setActiveTab] = useState("mainmeals");
   const data = [
     {
       label: "Main Meals",
       value: "mainmeals",
-      item: <CardContainer />,
     },
     {
       label: "Appetizers",
       value: "appetizers",
-      item: <CardContainer />,
     },
     {
       label: "Desserts",
       value: "desserts",
-      item: <CardContainer />,
     },
     {
-      label: "Dirinks",
-      value: "dirinks",
-      item: <CardContainer />,
+      label: "Drinks",
+      value: "drinks",  
     },
     {
       label: "Alcohol",
       value: "alcohol",
-      item: <CardContainer />,
     },
   ];
+  
+
   return (
-    <Tabs value={activeTab}>
+    <Tabs value={activeTab} className="w-full">
       <TabsHeader
         className="rounded-none border-b border-blue-gray-50 bg-transparent p-0"
         indicatorProps={{
@@ -59,9 +55,9 @@ export default function TabsComp() {
         ))}
       </TabsHeader>
       <TabsBody>
-        {data.map(({ value, item }) => (
+        {data.map(({ value }) => (
           <TabPanel key={value} value={value}>
-            {item}
+            <CardContainer activeTab={value} />
           </TabPanel>
         ))}
       </TabsBody>

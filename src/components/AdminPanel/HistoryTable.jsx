@@ -37,7 +37,7 @@ const TABLE_ROWS = [
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    account: "Elcan Eyvazli",
+    account: "Revan Asadov",
     amount: "$2,500",
     date: "Wed 3:00pm",
     status: "pending",
@@ -45,7 +45,7 @@ const TABLE_ROWS = [
   },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    account: "Elcan Eyvazli",
+    account: "Joshua Kelly",
     amount: "$2,500",
     date: "Wed 3:00pm",
     status: "cancelled",
