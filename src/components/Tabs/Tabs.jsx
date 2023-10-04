@@ -25,36 +25,37 @@ export default function TabsComp() {
     },
     {
       label: "Drinks",
-      value: "drinks",  
+      value: "drinks",
     },
     {
       label: "Alcohol",
       value: "alcohol",
     },
   ];
-  
 
   return (
     <Tabs value={activeTab} className="w-full">
-      <TabsHeader
-        className="rounded-none border-b border-blue-gray-50 bg-transparent p-0"
-        indicatorProps={{
-          className:
-            "bg-transparent border-b-2 border-gray-900 shadow-none rounded-none",
-        }}
-      >
+      <TabsHeader className="flex flex-col sm:flex-row">
         {data.map(({ label, value }) => (
           <Tab
             key={value}
             value={value}
             onClick={() => setActiveTab(value)}
-            className={activeTab === value ? "text-gray-900" : ""}
+            className={
+              activeTab === value ? "text-gray-900 text-sm md:text-lg" : ""
+            }
           >
             {label}
           </Tab>
         ))}
       </TabsHeader>
-      <TabsBody>
+      <TabsBody
+        animate={{
+          initial: { y: 250 },
+          mount: { y: 0 },
+          unmount: { y: 250 },
+        }}
+      >
         {data.map(({ value }) => (
           <TabPanel key={value} value={value}>
             <CardContainer activeTab={value} />

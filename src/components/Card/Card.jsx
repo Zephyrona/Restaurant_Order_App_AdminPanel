@@ -10,7 +10,7 @@ import {
 
 export default function Cards({ label, img, price, description }) {
   return (
-    <Card className="w-[350px]">
+    <Card className=" h-full w-full">
       <CardHeader shadow={false} floated={false} className="h-[250px] ">
         <img
           src={img}
@@ -23,7 +23,11 @@ export default function Cards({ label, img, price, description }) {
           <Typography className="font-medium">{label}</Typography>
           <Typography className="font-medium">{price}</Typography>
         </div>
-        <Typography variant="small" color="gray" className="font-normal opacity-75">
+        <Typography
+          variant="small"
+          color="gray"
+          className="font-normal opacity-75"
+        >
           {description}
         </Typography>
       </CardBody>

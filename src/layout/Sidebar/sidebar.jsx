@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   Card,
   List,
+  Select,
   ListItem,
   ListItemPrefix,
   Accordion,
@@ -11,7 +12,7 @@ import {
 } from "@material-tailwind/react";
 import {
   UserIcon,
-  Cog6ToothIcon,
+  // Cog6ToothIcon,
   CakeIcon,
   Squares2X2Icon,
   ClipboardDocumentIcon,
@@ -36,7 +37,7 @@ export default function Sidebar() {
       <div className="mb-10 p-4 w-[180px] h-[60px]">
         <img src="../img/logo.svg" alt="" draggable="false" />
       </div>
-      <List className="">
+      <List className="flex justify-between">
         <NavLink to="/">
           <ListItem className="focus:bg-transparent focus:text-white">
             <ListItemPrefix>
@@ -122,14 +123,14 @@ export default function Sidebar() {
             Reservation
           </ListItem>
         </NavLink>
-        <NavLink to="/settings">
+        {/* <NavLink to="/settings">
           <ListItem className="focus:bg-transparent focus:text-white">
             <ListItemPrefix>
               <Cog6ToothIcon className="h-5 w-5" />
-            </ListItemPrefix>
+            </ListItemPrefix>du
             Settings
           </ListItem>
-        </NavLink>
+        </NavLink> */}
         <NavLink to="/login">
           <ListItem className="focus:bg-transparent focus:text-white">
             <ListItemPrefix>

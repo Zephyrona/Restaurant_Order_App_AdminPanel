@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+import { useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
@@ -13,34 +15,19 @@ import {
   IconButton,
   Tooltip,
 } from "@material-tailwind/react";
-
-const TABLE_HEAD = ["Member", "Function", "Working", "Employed", "Edit"];
-
-const TABLE_ROWS = [
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "Elcan Eyvazli",
-    number: "(051)391-0242",
-    job: "Waiter",
-    working: true,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Smith",
-    number: "(051)391-0242",
-    job: "Chef",
-    working: false,
-    date: "23/04/18",
-  },
-];
+import AddMemberModal from "./AddMemberModal";
+import { TABLE_HEAD, TABLE_ROWS } from "../../db/membertable";
 
 export default function HistoryTable() {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(!open);
+
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
-        <div className="flex items-center justify-between gap-8">
-          <div>
+        <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
+          <div className="flex flex-col">
             <Typography variant="h5" color="blue-gray">
               Members list
             </Typography>
@@ -48,19 +35,25 @@ export default function HistoryTable() {
               See information about all members
             </Typography>
           </div>
-          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+          <div className="flex flex-col md:flex-row w-full shrink-0 gap-2 md:w-max">
             <div className="w-full md:w-72">
               <Input
                 label="Search"
                 icon={<MagnifyingGlassIcon className="h-5 w-5" />}
               />
             </div>
-            <Button className="flex items-center gap-3 bg-primary" size="sm">
+            <Button
+              className="flex items-center gap-3 bg-primary"
+              size="sm"
+              onClick={handleOpen}
+            >
               <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add member
             </Button>
+            <AddMemberModal open={open} handler={handleOpen} />
           </div>
         </div>
       </CardHeader>
+
       <CardBody className="overflow-scroll px-0">
         <table className="mt-4 w-full min-w-max table-auto text-left">
           <thead>
@@ -165,19 +158,7 @@ export default function HistoryTable() {
             1
           </IconButton>
           <IconButton variant="text" size="sm">
-            2
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            3
-          </IconButton>
-          <IconButton variant="text" size="sm">
             ...
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            8
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            9
           </IconButton>
           <IconButton variant="text" size="sm">
             10

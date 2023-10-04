@@ -6,10 +6,10 @@ export default function CardContainer({ activeTab }) {
   const filteredData = menudata.filter((item) => item.value === activeTab);
 
   return (
-    <div className="flex flex-row flex-wrap gap-[20px] items-center justify-start">
-      {filteredData.map(({ label, img, price, description }) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]">
+      {filteredData.map(({ id, label, img, price, description }) => (
         <Cards
-          key={label}
+          key={id}
           label={label}
           img={img}
           price={price}

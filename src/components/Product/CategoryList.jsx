@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+/* eslint-disable react/prop-types */
 import {
   Card,
   CardHeader,
@@ -10,34 +10,10 @@ import {
   Tooltip,
   Input,
 } from "@material-tailwind/react";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Icon } from "@iconify/react";
 
-const TABLE_HEAD = ["Category", "Description", "Edit", "Remove"];
-
-const TABLE_ROWS = [
-  {
-    category: "Main Meals",
-    description: "mainmeals",
-  },
-  {
-    category: "Appetizers",
-    description: "appetizers",
-  },
-  {
-    category: "Desserts",
-    description: "desserts",
-  },
-  {
-    category: "Dirinks",
-    description: "dirinks",
-  },
-  {
-    category: "Alcohol",
-    description: "alcohol",
-  },
-];
-
-export default function CategoryList() {
+export default function CategoryList({ tableRows, tableHead, onEdit, onRemove }) {
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -64,9 +40,9 @@ export default function CategoryList() {
         <table className="w-full min-w-max table-auto text-left">
           <thead>
             <tr>
-              {TABLE_HEAD.map((head) => (
+              {tableHead.map((head, index) => (
                 <th
-                  key={head}
+                  key={index}
                   className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
                 >
                   <Typography
@@ -81,8 +57,8 @@ export default function CategoryList() {
             </tr>
           </thead>
           <tbody>
-            {TABLE_ROWS.map(({ category, description }, index) => {
-              const isLast = index === TABLE_ROWS.length - 1;
+            {tableRows.map(({ category, description }, index) => {
+              const isLast = index === tableRows.length - 1;
               const classes = isLast
                 ? "p-4"
                 : "p-4 border-b border-blue-gray-50";
@@ -109,14 +85,22 @@ export default function CategoryList() {
                   </td>
                   <td className={classes}>
                     <Tooltip content="Edit Item">
-                      <IconButton variant="text" className="text-md">
+                      <IconButton
+                        variant="text"
+                        className="text-md"
+                        onClick={() => onEdit(index)}
+                      >
                         <Icon icon="material-symbols:edit" />
                       </IconButton>
                     </Tooltip>
                   </td>
                   <td className={classes}>
                     <Tooltip content="Remove Item">
-                      <IconButton variant="text" className="text-md">
+                      <IconButton
+                        variant="text"
+                        className="text-md"
+                        onClick={() => onRemove(index)}
+                      >
                         <Icon icon="pajamas:remove" />
                       </IconButton>
                     </Tooltip>
@@ -136,19 +120,7 @@ export default function CategoryList() {
             1
           </IconButton>
           <IconButton variant="text" size="sm">
-            2
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            3
-          </IconButton>
-          <IconButton variant="text" size="sm">
             ...
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            8
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            9
           </IconButton>
           <IconButton variant="text" size="sm">
             10

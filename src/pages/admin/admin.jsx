@@ -6,7 +6,7 @@ import HistoryTable from "../../components/AdminPanel/HistoryTable";
 export default function admin() {
   return (
     <div className="flex flex-col w-full px-[30px] gap-[50px]">
-      <div className="flex flex-row items-center gap-[30px]">
+      <div className="flex flex-col lg:flex-row items-center gap-[30px]">
         <SummaryCard />
         <SummaryCard />
         <SummaryCard />

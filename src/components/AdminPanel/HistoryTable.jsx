@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ArrowDownTrayIcon,
   MagnifyingGlassIcon,
@@ -12,61 +13,36 @@ import {
   CardFooter,
   Avatar,
   IconButton,
-  Tooltip,
   Input,
+  Tooltip,
 } from "@material-tailwind/react";
 import { Icon } from "@iconify/react";
-
-const TABLE_HEAD = [
-  "Account",
-  "Amount",
-  "Date and Time",
-  "Status",
-  "Payment Method",
-  "Order List",
-];
-
-const TABLE_ROWS = [
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    account: "Elcan Eyvazli",
-    amount: "$2,500",
-    date: "Wed 3:00pm",
-    status: "paid",
-    method: "cash",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    account: "Revan Asadov",
-    amount: "$2,500",
-    date: "Wed 3:00pm",
-    status: "pending",
-    method: "card",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    account: "Joshua Kelly",
-    amount: "$2,500",
-    date: "Wed 3:00pm",
-    status: "cancelled",
-    method: "cash",
-  },
-];
+import { OrderListModal } from "./OrderListModal"; // Make sure to import the OrderListModal component.
+import { TABLE_HEAD, TABLE_ROWS } from "../../db/historytable";
 
 export default function MemberTable() {
+  const [open, setOpen] = useState(false);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [openOrderList, setOpenOrderList] = useState([]);
+
+  const handleOpenOrderList = (id) => {
+    setOpen(!open);
+    setSelectedOrderId(id);
+    const orderList = TABLE_ROWS.find((order) => order.id === id);
+    setOpenOrderList(orderList ? orderList.orderdata : []);
+  };
+
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
         <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
-          <div>
-            <Typography variant="h5" color="blue-gray">
-              Recent Transactions
-            </Typography>
-            <Typography color="gray" className="mt-1 font-normal">
+          <div className="flex flex-col">
+            <Typography>Recent Transactions</Typography>
+            <Typography>
               These are details about the last transactions
             </Typography>
           </div>
-          <div className="flex w-full shrink-0 gap-2 md:w-max">
+          <div className="flex flex-col md:flex-row w-full shrink-0 gap-2 md:w-max">
             <div className="w-full md:w-72">
               <Input
                 label="Search"
@@ -101,14 +77,14 @@ export default function MemberTable() {
           </thead>
           <tbody>
             {TABLE_ROWS.map(
-              ({ img, account, amount, date, status, method }, index) => {
+              ({ id, img, account, amount, date, status, method }, index) => {
                 const isLast = index === TABLE_ROWS.length - 1;
                 const classes = isLast
                   ? "p-4"
                   : "p-4 border-b border-blue-gray-50";
 
                 return (
-                  <tr key={account}>
+                  <tr key={id}>
                     <td className={classes}>
                       <div className="flex items-center gap-3">
                         <Avatar
@@ -117,13 +93,7 @@ export default function MemberTable() {
                           size="md"
                           className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
                         />
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-bold"
-                        >
-                          {account}
-                        </Typography>
+                        <Typography className="font-bold">{account}</Typography>
                       </div>
                     </td>
                     <td className={classes}>
@@ -177,8 +147,12 @@ export default function MemberTable() {
                       </div>
                     </td>
                     <td className={classes}>
-                      <Tooltip content="Edit User">
-                        <IconButton variant="text">
+                      <Tooltip content="Show Order">
+                        <IconButton
+                          onClick={() => handleOpenOrderList(id)}
+                          size="sm"
+                          variant="text"
+                        >
                           <Icon icon="gg:list" className="text-lg" />
                         </IconButton>
                       </Tooltip>
@@ -199,19 +173,7 @@ export default function MemberTable() {
             1
           </IconButton>
           <IconButton variant="text" size="sm">
-            2
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            3
-          </IconButton>
-          <IconButton variant="text" size="sm">
             ...
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            8
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            9
           </IconButton>
           <IconButton variant="text" size="sm">
             10
@@ -221,6 +183,12 @@ export default function MemberTable() {
           Next
         </Button>
       </CardFooter>
+      <OrderListModal
+        handleOpenOrderList={handleOpenOrderList}
+        openOrderList={openOrderList}
+        open={open}
+        selectedOrderId={selectedOrderId}
+      />
     </Card>
   );
 }

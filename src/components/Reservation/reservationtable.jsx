@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   Card,
@@ -12,32 +13,12 @@ import {
 } from "@material-tailwind/react";
 import { Icon } from "@iconify/react";
 
-const TABLE_HEAD = ["Name", "Date and Time", "Edit", "Remove"];
-
-const TABLE_ROWS = [
-  {
-    name: "Elcan Eyvazli",
-    date: "12/08/2023",
-  },
-  {
-    name: "Elcan Eyvazli",
-    date: "12/08/2023",
-  },
-  {
-    name: "Elcan Eyvazli",
-    date: "12/08/2023",
-  },
-  {
-    name: "Elcan Eyvazli",
-    date: "12/08/2023",
-  },
-  {
-    name: "Elcan Eyvazli",
-    date: "12/08/2023",
-  },
-];
-
-export default function ReservationList() {
+export default function ReservationList({
+  tablerows,
+  TABLE_HEAD,
+  handleDeteleReservation,
+  handleEditReservation,
+}) {
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -81,8 +62,8 @@ export default function ReservationList() {
             </tr>
           </thead>
           <tbody>
-            {TABLE_ROWS.map(({ name, date }, index) => {
-              const isLast = index === TABLE_ROWS.length - 1;
+            {tablerows.map(({ name, date, size }, index) => {
+              const isLast = index === tablerows.length - 1;
               const classes = isLast
                 ? "p-4"
                 : "p-4 border-b border-blue-gray-50";
@@ -108,15 +89,32 @@ export default function ReservationList() {
                     </Typography>
                   </td>
                   <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {size}
+                    </Typography>
+                  </td>
+                  <td className={classes}>
                     <Tooltip content="Edit Item">
-                      <IconButton variant="text" className="text-md">
+                      <IconButton
+                        variant="text"
+                        className="text-md"
+                        onClick={() => handleEditReservation(index)}
+                      >
                         <Icon icon="material-symbols:edit" />
                       </IconButton>
                     </Tooltip>
                   </td>
                   <td className={classes}>
                     <Tooltip content="Remove Item">
-                      <IconButton variant="text" className="text-md">
+                      <IconButton
+                        variant="text"
+                        className="text-md"
+                        onClick={() => handleDeteleReservation(index)}
+                      >
                         <Icon icon="pajamas:remove" />
                       </IconButton>
                     </Tooltip>
@@ -136,19 +134,7 @@ export default function ReservationList() {
             1
           </IconButton>
           <IconButton variant="text" size="sm">
-            2
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            3
-          </IconButton>
-          <IconButton variant="text" size="sm">
             ...
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            8
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            9
           </IconButton>
           <IconButton variant="text" size="sm">
             10

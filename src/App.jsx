@@ -1,16 +1,17 @@
 /* eslint-disable no-unused-vars */
-import "./App.css";
-import Sidebar from "./components/Sidebar/sidebar";
+import "~/App.css";
+import Sidebar from "~/layout/Sidebar/sidebar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Admin from "./pages/admin/admin";
-import Chef from "./pages/chef/chef";
-import Products from "./pages/newproducts/products";
-import Menu from "./pages/menu/menu";
-import Reservation from "./pages/reservation/reservation";
-import Settings from "./pages/settings/settings";
-import Waiter from "./pages/waiter/waiter";
-import NavbarContainer from "./components/Navbar/NavbarContainer";
-import Category from "./pages/newproducts/category";
+import Admin from "~/pages/admin/admin";
+import Chef from "~/pages/chef/chef";
+import Products from "~/pages/newproducts/products";
+import Menu from "~/pages/menu/menu";
+import Reservation from "~/pages/reservation/reservation";
+import Settings from "~/pages/settings/settings";
+import Waiter from "~/pages/waiter/waiter";
+import NavbarContainer from "~/layout/Navbar/NavbarContainer";
+import Category from "~/pages/newproducts/category";
+import Error from "~/pages/error/error";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       <div className="w-[20%] h-[100vh]">
         <Sidebar />
       </div>
-      <div className="w-[80%] overflow-y-auto pb-[50px]">
+      <div className="w-[100%] overflow-y-auto pb-[50px]">
         <NavbarContainer />
         <Routes>
           <Route path="/" element={<Menu />} />
@@ -29,6 +30,7 @@ function App() {
           <Route path="/products/category" element={<Category />} />
           <Route path="/reservation" element={<Reservation />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       </div>
     </div>

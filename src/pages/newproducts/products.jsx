@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Icon } from "@iconify/react";
 import {
   Typography,
@@ -9,7 +10,46 @@ import {
 } from "@material-tailwind/react";
 import ProductList from "../../components/Product/ProductList";
 
-export default function products() {
+const tabelHead = ["Item", "Category", "Price", "Edit", "Remove"];
+
+const tabelRowsContainer = [
+  {
+
+    item: "Main Meals",
+    category: "mainmeals",
+    price: "$95.00",
+  },
+  {
+    item: "Appetizers",
+    category: "appetizers",
+    price: "$95.00",
+  },
+  {
+    item: "Desserts",
+    category: "desserts",
+    price: "$95.00",
+  },
+  {
+    item: "Dirinks",
+    category: "dirinks",
+    price: "$95.00",
+  },
+  {
+    item: "Alcohol",
+    category: "alcohol",
+    price: "$95.00",
+  },
+];
+
+export default function Products() {
+  const [tabelRows, setTabelRows] = useState(tabelRowsContainer);
+
+  const handleRemove = (index) => {
+    const newTabelRows = [...tabelRows];
+    newTabelRows.splice(index, 1);
+    setTabelRows(newTabelRows);
+  };
+
   return (
     <div className="flex flex-col gap-[30px]">
       <Typography className="text-2xl text-text font-bold px-[30px]">
@@ -37,12 +77,14 @@ export default function products() {
         <Textarea label="Enter Item Description" />
       </div>
       <div className="flex justify-end px-[30px]">
-        <Button className="bg-primary" >
-          Create Item
-        </Button>
+        <Button className="bg-primary">Create Item</Button>
       </div>
       <div className="flex flex-col justify-end px-[30px]">
-        <ProductList />
+        <ProductList
+          handleRemove={handleRemove}
+          tabelRows={tabelRows}
+          tabelHead={tabelHead}
+        />
       </div>
     </div>
   );

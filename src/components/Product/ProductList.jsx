@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   Card,
@@ -12,37 +13,7 @@ import {
 } from "@material-tailwind/react";
 import { Icon } from "@iconify/react";
 
-const TABLE_HEAD = ["Item", "Category", "Price", "Edit", "Remove"];
-
-const TABLE_ROWS = [
-  {
-    item: "Main Meals",
-    category: "mainmeals",
-    price: "$95.00",
-  },
-  {
-    item: "Appetizers",
-    category: "appetizers",
-    price: "$95.00",
-  },
-  {
-    item: "Desserts",
-    category: "desserts",
-    price: "$95.00",
-  },
-  {
-    item: "Dirinks",
-    category: "dirinks",
-    price: "$95.00",
-  },
-  {
-    item: "Alcohol",
-    category: "alcohol",
-    price: "$95.00",
-  },
-];
-
-export default function ProductList() {
+export default function ProductList({ tabelRows, tabelHead, handleRemove }) {
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -69,7 +40,7 @@ export default function ProductList() {
         <table className="w-full min-w-max table-auto text-left">
           <thead>
             <tr>
-              {TABLE_HEAD.map((head) => (
+              {tabelHead.map((head) => (
                 <th
                   key={head}
                   className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
@@ -86,8 +57,8 @@ export default function ProductList() {
             </tr>
           </thead>
           <tbody>
-            {TABLE_ROWS.map(({ item, category, price }, index) => {
-              const isLast = index === TABLE_ROWS.length - 1;
+            {tabelRows.map(({ item, category, price }, index) => {
+              const isLast = index === tabelRows.length - 1;
               const classes = isLast
                 ? "p-4"
                 : "p-4 border-b border-blue-gray-50";
@@ -130,7 +101,11 @@ export default function ProductList() {
                   </td>
                   <td className={classes}>
                     <Tooltip content="Remove Item">
-                      <IconButton variant="text" className="text-md">
+                      <IconButton
+                        variant="text"
+                        className="text-md"
+                        onClick={handleRemove}
+                      >
                         <Icon icon="pajamas:remove" />
                       </IconButton>
                     </Tooltip>
@@ -150,19 +125,7 @@ export default function ProductList() {
             1
           </IconButton>
           <IconButton variant="text" size="sm">
-            2
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            3
-          </IconButton>
-          <IconButton variant="text" size="sm">
             ...
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            8
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            9
           </IconButton>
           <IconButton variant="text" size="sm">
             10
