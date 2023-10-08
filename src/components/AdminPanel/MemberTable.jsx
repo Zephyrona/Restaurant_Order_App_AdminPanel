@@ -16,13 +16,22 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import AddMemberModal from "./AddMemberModal";
+import EditMemberModal from "./EditMemberModal";
 import { TABLE_HEAD, TABLE_ROWS } from "../../db/membertable";
 
-export default function HistoryTable() {
+export default function MemberTable() {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
 
+  const [editopen, setEditopen] = useState(false);
+  const [openEditUserList, setOpenEditUserList] = useState([]);
+
+  const handleEditOpen = (id) => {
+    setEditopen(!editopen);
+    const editUserList = TABLE_ROWS.find((member) => member.id === id);
+    setOpenEditUserList(editUserList ? [editUserList] : []);
+  };
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -86,7 +95,12 @@ export default function HistoryTable() {
                   <tr key={name}>
                     <td className={classes}>
                       <div className="flex items-center gap-3">
-                        <Avatar src={img} alt={name} size="sm" />
+                        <Avatar
+                          draggable="false"
+                          src={img}
+                          alt={name}
+                          size="sm"
+                        />
                         <div className="flex flex-col">
                           <Typography
                             variant="small"
@@ -137,7 +151,10 @@ export default function HistoryTable() {
                     </td>
                     <td className={classes}>
                       <Tooltip content="Edit User">
-                        <IconButton variant="text">
+                        <IconButton
+                          variant="text"
+                          onClick={() => handleEditOpen(index + 1)}
+                        >
                           <PencilIcon className="h-4 w-4" />
                         </IconButton>
                       </Tooltip>
@@ -168,6 +185,11 @@ export default function HistoryTable() {
           Next
         </Button>
       </CardFooter>
+      <EditMemberModal
+        open={editopen}
+        handler={handleEditOpen}
+        openEditUserList={openEditUserList}
+      />
     </Card>
   );
 }

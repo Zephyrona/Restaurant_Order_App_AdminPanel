@@ -13,14 +13,7 @@ import {
   List,
 } from "@material-tailwind/react";
 
-export function OrderListModal({
-  handleOpenOrderList,
-  open,
-  openOrderList,
-  selectedOrderId,
-}) {
-  console.log(openOrderList);
-
+export function OrderListModal({ handleOpenOrderList, open, openOrderList }) {
   return (
     <Dialog
       size="xs"
@@ -41,40 +34,35 @@ export function OrderListModal({
             Order List
           </Typography>
         </CardHeader>
-        <CardBody className="flex flex-col">
-          {openOrderList &&
-            openOrderList
-              .filter((order) => order.id === selectedOrderId)
-              .map((order,id) =>
-                <List key={id}>
-                  <ListItem>
-                    <ListItemPrefix className="w-[30px] h-[30px]">
-                      <Avatar
-                        variant="circular"
-                        alt="candice"
-                        className="w-full h-full"
-                        src={order.img}
-                      />
-                    </ListItemPrefix>
-                    <div className="flex flex-row justify-between items-center w-full">
-                      <div className="flex flex-col gap-[5px] items-start">
-                        <Typography variant="h6" color="blue-gray">
-                          {order.label}
-                        </Typography>
-                        <Typography className="font-normal">
-                          {order.value}x
-                        </Typography>
-                      </div>
-                      <div className="flex flex-col gap-[5px] items-end">
-                        <Typography>{order.price}</Typography>
-                        <Typography className="font-normal">
-                          {order.size}x
-                        </Typography>
-                      </div>
-                    </div>
-                  </ListItem>
-                </List>
-              )}
+        <CardBody className="flex flex-col ">
+          {openOrderList.map((order, id) => (
+            <>
+              <List key={id}>
+                <ListItem>
+                  <ListItemPrefix>
+                    <Avatar
+                      draggable="false"
+                      variant="circular"
+                      alt="candice"
+                      src={order.img}
+                    />
+                  </ListItemPrefix>
+                  <div>
+                    <Typography variant="h6" color="blue-gray">
+                      {order.label}
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      color="gray"
+                      className="font-normal"
+                    >
+                      {order.value}x {order.size}x {order.price}
+                    </Typography>
+                  </div>
+                </ListItem>
+              </List>
+            </>
+          ))}
         </CardBody>
         <CardFooter className="pt-0">
           <Button

@@ -20,14 +20,12 @@ import { Icon } from "@iconify/react";
 import { OrderListModal } from "./OrderListModal"; // Make sure to import the OrderListModal component.
 import { TABLE_HEAD, TABLE_ROWS } from "../../db/historytable";
 
-export default function MemberTable() {
+export default function HIstoryTable() {
   const [open, setOpen] = useState(false);
-  const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [openOrderList, setOpenOrderList] = useState([]);
 
   const handleOpenOrderList = (id) => {
     setOpen(!open);
-    setSelectedOrderId(id);
     const orderList = TABLE_ROWS.find((order) => order.id === id);
     setOpenOrderList(orderList ? orderList.orderdata : []);
   };
@@ -88,6 +86,7 @@ export default function MemberTable() {
                     <td className={classes}>
                       <div className="flex items-center gap-3">
                         <Avatar
+                        draggable="false"
                           src={img}
                           alt={account}
                           size="md"
@@ -187,7 +186,6 @@ export default function MemberTable() {
         handleOpenOrderList={handleOpenOrderList}
         openOrderList={openOrderList}
         open={open}
-        selectedOrderId={selectedOrderId}
       />
     </Card>
   );

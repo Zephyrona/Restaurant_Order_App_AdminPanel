@@ -29,7 +29,7 @@ export default function AddMemberModal({ open, handler }) {
           variant="gradient"
           className="mb-4 grid h-28 place-items-center bg-primary"
         >
-          <Typography color="white">Add New Member</Typography>
+          <Typography color="white" className="text-xl font-bold">Add New Member</Typography>
         </CardHeader>
         <CardBody className="flex flex-col gap-4">
           <Input label="User name" size="lg" required />

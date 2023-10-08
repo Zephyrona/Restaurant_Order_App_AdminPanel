@@ -1,6 +1,6 @@
-import MemberTable from "../../components/AdminPanel/MemberTable";
 import SummaryCard from "../../components/AdminPanel/SummaryCard";
 import HistoryTable from "../../components/AdminPanel/HistoryTable";
+import MemberTable from "../../components/AdminPanel/MemberTable";
 // import BarChart from "../../components/AdminPanel/BarChart";
 
 export default function admin() {
