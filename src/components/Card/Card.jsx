@@ -21,7 +21,7 @@ export default function Cards({ label, img, price, description }) {
       <CardBody>
         <div className="mb-2 flex items-center justify-between">
           <Typography className="font-medium">{label}</Typography>
-          <Typography className="font-medium">{price}</Typography>
+          <Typography className="font-medium">${price}</Typography>
         </div>
         <Typography
           variant="small"

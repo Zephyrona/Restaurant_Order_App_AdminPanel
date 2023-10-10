@@ -14,6 +14,7 @@ import Category from "~/pages/newproducts/category";
 import Error from "~/pages/error/error";
 
 function App() {
+
   return (
     <div className="flex flex-row gap-[0] w-[100%] h-[100vh]">
       <div className="w-[20%] h-[100vh]">

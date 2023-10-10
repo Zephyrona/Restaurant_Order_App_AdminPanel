@@ -120,7 +120,7 @@ const menudata = [
     id: 14,
     label: "Drinks",
     value: "drinks",
-    img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80",
+    img: "https://images.unsplash.com/photo-1474045326708-cdc78c2487cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80",
     price: "$95.00",
     description:
       "With plenty of talk and listen time, voice-activated Siri access, and an available wireless charging case.",
