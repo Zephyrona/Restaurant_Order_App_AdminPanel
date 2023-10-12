@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import {
   Tabs,
   TabsHeader,
@@ -7,25 +8,9 @@ import {
   TabPanel,
   Spinner,
 } from "@material-tailwind/react";
-import CardContainer from "../Card/CardContainer"; // Import CardContainer from your file
-import axios from "axios";
+import CardContainer from "../Card/CardContainer";
 
-export default function TabsComp() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get("http://165.227.138.148:8000/api/Categories")
-      .then((response) => {
-        setData(response.data);
-        setLoading(false);
-      })
-      .catch((error) => console.error(error));
-  }, []);
-
-  console.log(data);
-
+export default function TabsComp({ data, loading = false }) {
   const [activeTab, setActiveTab] = useState("mainmeals");
   return (
     <>

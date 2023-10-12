@@ -12,7 +12,7 @@ export default function AddToCardButton() {
     <Menu>
       <MenuHandler>
         <IconButton variant="text">
-          <ShoppingCartIcon className="h-[24px] w-[24px] text-text" />
+          <ShoppingCartIcon className="h-[24px] w-[24px] text-text dark:text-white" />
         </IconButton>
       </MenuHandler>
       <MenuList>

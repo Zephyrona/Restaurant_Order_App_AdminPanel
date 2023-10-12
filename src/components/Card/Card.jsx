@@ -10,7 +10,7 @@ import {
 
 export default function Cards({ label, img, price, description }) {
   return (
-    <Card className=" h-full w-full">
+    <Card className=" h-full w-full dark:bg-bg-grey ">
       <CardHeader shadow={false} floated={false} className="h-[250px] ">
         <img
           src={img}
@@ -20,13 +20,13 @@ export default function Cards({ label, img, price, description }) {
       </CardHeader>
       <CardBody>
         <div className="mb-2 flex items-center justify-between">
-          <Typography className="font-medium">{label}</Typography>
-          <Typography className="font-medium">${price}</Typography>
+          <Typography className="font-medium dark:text-white">{label}</Typography>
+          <Typography className="font-medium dark:text-white">${price}</Typography>
         </div>
         <Typography
           variant="small"
           color="gray"
-          className="font-normal opacity-75"
+          className="font-normal opacity-75 dark:text-white"
         >
           {description}
         </Typography>
@@ -34,7 +34,7 @@ export default function Cards({ label, img, price, description }) {
       <CardFooter className="pt-0">
         <Button
           fullWidth={true}
-          className="bg-primary text-white shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
+          className="bg-primary text-white  shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
         >
           Add to Cart
         </Button>

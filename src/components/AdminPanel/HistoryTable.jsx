@@ -17,8 +17,9 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import { Icon } from "@iconify/react";
-import { OrderListModal } from "./OrderListModal"; // Make sure to import the OrderListModal component.
+import { OrderListModal } from "./OrderListModal";
 import { TABLE_HEAD, TABLE_ROWS } from "../../db/historytable";
+import { CSVLink } from "react-csv";
 
 export default function HIstoryTable() {
   const [open, setOpen] = useState(false);
@@ -47,9 +48,12 @@ export default function HIstoryTable() {
                 icon={<MagnifyingGlassIcon className="h-5 w-5" />}
               />
             </div>
-            <Button className="flex items-center gap-3 bg-primary" size="sm">
-              <ArrowDownTrayIcon strokeWidth={2} className="h-4 w-4" /> Download
-            </Button>
+            <CSVLink data={TABLE_ROWS}>
+              <Button className="flex items-center gap-3 bg-primary" size="sm">
+                <ArrowDownTrayIcon strokeWidth={2} className="h-4 w-4" />{" "}
+                Download
+              </Button>
+            </CSVLink>
           </div>
         </div>
       </CardHeader>
@@ -86,7 +90,7 @@ export default function HIstoryTable() {
                     <td className={classes}>
                       <div className="flex items-center gap-3">
                         <Avatar
-                        draggable="false"
+                          draggable="false"
                           src={img}
                           alt={account}
                           size="md"

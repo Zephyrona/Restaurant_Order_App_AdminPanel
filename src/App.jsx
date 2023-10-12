@@ -12,16 +12,44 @@ import Waiter from "~/pages/waiter/waiter";
 import NavbarContainer from "~/layout/Navbar/NavbarContainer";
 import Category from "~/pages/newproducts/category";
 import Error from "~/pages/error/error";
+import { useEffect, useState } from "react";
 
 function App() {
+  const darkMode = localStorage.getItem("theme") === "dark";
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") === "light" ? "dark" : "light"
+  );
+
+  useEffect(() => {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  const changeTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
 
   return (
-    <div className="flex flex-row gap-[0] w-[100%] h-[100vh]">
+    <div className="flex flex-row gap-[0] w-[100%] h-[100vh] dark:bg-bg-dark">
       <div className="w-[20%] h-[100vh]">
-        <Sidebar />
+        <Sidebar darkMode={darkMode} />
       </div>
       <div className="w-[100%] overflow-y-auto pb-[50px]">
-        <NavbarContainer />
+        <NavbarContainer changeTheme={changeTheme} darkMode={darkMode} />
         <Routes>
           <Route path="/" element={<Menu />} />
           <Route path="/admin" element={<Admin />} />

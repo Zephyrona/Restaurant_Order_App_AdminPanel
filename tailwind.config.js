@@ -22,6 +22,8 @@ module.exports = withMT({
         'text': '#1E293B',
         'text-grey': '#6F6F6F',
         'bg': '#F8FAFC',
+        'bg-dark': '#25283D',
+        'bg-grey': '#25282e',
 
       },
       fontSize: {

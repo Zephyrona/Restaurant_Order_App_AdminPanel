@@ -13,7 +13,13 @@ import {
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Icon } from "@iconify/react";
 
-export default function CategoryList({ tableRows, tableHead, onEdit, onRemove }) {
+export default function CategoryList({
+  tableHead,
+  data,
+  deleteCategory,
+  handleOpen,
+  open,
+}) {
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -57,21 +63,21 @@ export default function CategoryList({ tableRows, tableHead, onEdit, onRemove })
             </tr>
           </thead>
           <tbody>
-            {tableRows.map(({ category, description }, index) => {
-              const isLast = index === tableRows.length - 1;
+            {data.map((item, index) => {
+              const isLast = index === data.length - 1;
               const classes = isLast
                 ? "p-4"
                 : "p-4 border-b border-blue-gray-50";
 
               return (
-                <tr key={index}>
+                <tr key={item.id}>
                   <td className={classes}>
                     <Typography
                       variant="small"
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {category}
+                      {item.name}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -80,7 +86,7 @@ export default function CategoryList({ tableRows, tableHead, onEdit, onRemove })
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {description}
+                      {item.description}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -88,7 +94,7 @@ export default function CategoryList({ tableRows, tableHead, onEdit, onRemove })
                       <IconButton
                         variant="text"
                         className="text-md"
-                        onClick={() => onEdit(index)}
+                        onClick={() => handleOpen(item.id)}
                       >
                         <Icon icon="material-symbols:edit" />
                       </IconButton>
@@ -99,7 +105,7 @@ export default function CategoryList({ tableRows, tableHead, onEdit, onRemove })
                       <IconButton
                         variant="text"
                         className="text-md"
-                        onClick={() => onRemove(index)}
+                        onClick={() => deleteCategory(item.id)}
                       >
                         <Icon icon="pajamas:remove" />
                       </IconButton>

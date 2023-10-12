@@ -13,7 +13,7 @@ import {
 } from "@material-tailwind/react";
 import { Icon } from "@iconify/react";
 
-export default function ProductList({ tabelRows, tabelHead, handleRemove }) {
+export default function ProductList({ tabelHead, data, deleteProduct }) {
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -57,21 +57,22 @@ export default function ProductList({ tabelRows, tabelHead, handleRemove }) {
             </tr>
           </thead>
           <tbody>
-            {tabelRows.map(({ item, category, price }, index) => {
-              const isLast = index === tabelRows.length - 1;
+            {data.map((item, index) => {
+              const isLast = index === data.length - 1;
               const classes = isLast
                 ? "p-4"
                 : "p-4 border-b border-blue-gray-50";
-
+              console.log(item);
+              console;
               return (
-                <tr key={index}>
+                <tr key={item.id}>
                   <td className={classes}>
                     <Typography
                       variant="small"
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {item}
+                      {item.title}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -80,7 +81,7 @@ export default function ProductList({ tabelRows, tabelHead, handleRemove }) {
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {category}
+                      {item.category.name}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -89,7 +90,7 @@ export default function ProductList({ tabelRows, tabelHead, handleRemove }) {
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {price}
+                      {item.price}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -104,7 +105,7 @@ export default function ProductList({ tabelRows, tabelHead, handleRemove }) {
                       <IconButton
                         variant="text"
                         className="text-md"
-                        onClick={handleRemove}
+                        onClick={() => deleteProduct(item.id)}
                       >
                         <Icon icon="pajamas:remove" />
                       </IconButton>

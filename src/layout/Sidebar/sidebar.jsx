@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import {
   Card,
   List,
-  Select,
   ListItem,
   ListItemPrefix,
   Accordion,
@@ -25,7 +25,7 @@ import { NavLink } from "react-router-dom";
 import "../../App.css";
 import { Icon } from "@iconify/react";
 
-export default function Sidebar() {
+export default function Sidebar({darkMode}) {
   const [open, setOpen] = useState(0);
 
   const handleOpen = (value) => {
@@ -33,13 +33,16 @@ export default function Sidebar() {
   };
 
   return (
-    <Card className="h-[100%] w-[100%] p-4 shadow-xl shadow-blue-gray-900/5">
+    <Card className="h-[100%] w-[100%] p-4 shadow-xl dark:bg-bg-dark shadow-blue-gray-900/5">
       <div className="mb-10 p-4 w-[180px] h-[60px]">
-        <img src="../img/logo.svg" alt="" draggable="false" />
+        {
+          darkMode ? <img src="../img/logo2.svg" alt="" draggable="false" /> : <img src="../img/logo.svg" alt="" draggable="false" />
+        }
+        
       </div>
       <List className="flex justify-between">
         <NavLink to="/">
-          <ListItem className="focus:bg-transparent focus:text-white">
+          <ListItem className="focus:bg-transparent focus:text-white dark:text-white">
             <ListItemPrefix>
               <Squares2X2Icon className="h-5 w-5" />
             </ListItemPrefix>
@@ -47,7 +50,7 @@ export default function Sidebar() {
           </ListItem>
         </NavLink>
         <NavLink to="/admin">
-          <ListItem className="focus:bg-transparent focus:text-white">
+          <ListItem className="focus:bg-transparent focus:text-white dark:text-white">
             <ListItemPrefix>
               <UserIcon className="h-5 w-5" />
             </ListItemPrefix>
@@ -55,7 +58,7 @@ export default function Sidebar() {
           </ListItem>
         </NavLink>
         <NavLink to="/waiter">
-          <ListItem className="focus:bg-transparent focus:text-white">
+          <ListItem className="focus:bg-transparent focus:text-white dark:text-white">
             <ListItemPrefix>
               <ClipboardDocumentIcon className="h-5 w-5" />
             </ListItemPrefix>
@@ -63,7 +66,7 @@ export default function Sidebar() {
           </ListItem>
         </NavLink>
         <NavLink to="/chef">
-          <ListItem className="focus:bg-transparent focus:text-white">
+          <ListItem className="focus:bg-transparent focus:text-white dark:text-white">
             <ListItemPrefix>
               <CakeIcon className="h-5 w-5" />
             </ListItemPrefix>
@@ -75,7 +78,7 @@ export default function Sidebar() {
           icon={
             <ChevronDownIcon
               strokeWidth={2.5}
-              className={`mx-auto h-4 w-4 transition-transform ${
+              className={`mx-auto h-4 w-4 transition-transform dark:text-white ${
                 open === 1 ? "rotate-180" : ""
               }`}
             />
@@ -84,12 +87,12 @@ export default function Sidebar() {
           <ListItem className="p-0" selected={open === 1}>
             <AccordionHeader
               onClick={() => handleOpen(1)}
-              className="border-b-0 p-3"
+              className="border-b-0 p-3 "
             >
               <ListItemPrefix>
-                <RectangleStackIcon className="h-5 w-5" />
+                <RectangleStackIcon className="h-5 w-5 dark:text-white" />
               </ListItemPrefix>
-              <Typography color="blue-gray" className="mr-auto font-normal">
+              <Typography color="blue-gray" className="mr-auto font-normal dark:text-white">
                 Products
               </Typography>
             </AccordionHeader>
@@ -97,7 +100,7 @@ export default function Sidebar() {
           <AccordionBody className="py-1">
             <List className="pl-[20px]">
               <NavLink to="/products/item">
-                <ListItem className="focus:bg-transparent focus:text-white">
+                <ListItem className="focus:bg-transparent focus:text-white dark:text-white">
                   <ListItemPrefix>
                     <Icon icon="material-symbols:place-item-rounded" />
                   </ListItemPrefix>
@@ -105,7 +108,7 @@ export default function Sidebar() {
                 </ListItem>
               </NavLink>
               <NavLink to="/products/category">
-                <ListItem className="focus:bg-transparent focus:text-white">
+                <ListItem className="focus:bg-transparent focus:text-white dark:text-white">
                   <ListItemPrefix>
                     <Icon icon="bx:category" />
                   </ListItemPrefix>
@@ -116,7 +119,7 @@ export default function Sidebar() {
           </AccordionBody>
         </Accordion>
         <NavLink to="/reservation">
-          <ListItem className="focus:bg-transparent focus:text-white">
+          <ListItem className="focus:bg-transparent focus:text-white dark:text-white">
             <ListItemPrefix>
               <ClockIcon className="h-5 w-5" />
             </ListItemPrefix>
@@ -132,7 +135,7 @@ export default function Sidebar() {
           </ListItem>
         </NavLink> */}
         <NavLink to="/login">
-          <ListItem className="focus:bg-transparent focus:text-white">
+          <ListItem className="focus:bg-transparent focus:text-white dark:text-white">
             <ListItemPrefix>
               <ArrowRightOnRectangleIcon className="h-5 w-5" />
             </ListItemPrefix>
