@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
@@ -12,8 +13,24 @@ import {
   Input,
 } from "@material-tailwind/react";
 import { Icon } from "@iconify/react";
+import { useState } from "react";
+import UpdateProduct from "./UpdateProduct";
 
-export default function ProductList({ tabelHead, data, deleteProduct }) {
+export default function ProductList({
+  tabelHead,
+  data,
+  setData,
+  deleteProduct,
+  dataCategory,
+}) {
+  const [editopen, setEditopen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleEditOpen = (product) => {
+    setSelectedProduct(product);
+    setEditopen(true);
+  };
+
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -62,7 +79,6 @@ export default function ProductList({ tabelHead, data, deleteProduct }) {
               const classes = isLast
                 ? "p-4"
                 : "p-4 border-b border-blue-gray-50";
-              console.log(item);
               console;
               return (
                 <tr key={item.id}>
@@ -95,7 +111,11 @@ export default function ProductList({ tabelHead, data, deleteProduct }) {
                   </td>
                   <td className={classes}>
                     <Tooltip content="Edit Item">
-                      <IconButton variant="text" className="text-md">
+                      <IconButton
+                        variant="text"
+                        className="text-md"
+                        onClick={() => handleEditOpen(item)}
+                      >
                         <Icon icon="material-symbols:edit" />
                       </IconButton>
                     </Tooltip>
@@ -117,7 +137,7 @@ export default function ProductList({ tabelHead, data, deleteProduct }) {
           </tbody>
         </table>
       </CardBody>
-      <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+      {/* <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
         <Button variant="outlined" size="sm">
           Back
         </Button>
@@ -135,7 +155,16 @@ export default function ProductList({ tabelHead, data, deleteProduct }) {
         <Button variant="outlined" size="sm">
           Next
         </Button>
-      </CardFooter>
+      </CardFooter> */}
+      <UpdateProduct
+        open={editopen}
+        handleOpen={() => setEditopen(!editopen)}
+        selectedProduct={selectedProduct}
+        setSelectedProduct={setSelectedProduct}
+        data={data}
+        setData={setData}
+        dataCategory={dataCategory}
+      />
     </Card>
   );
 }

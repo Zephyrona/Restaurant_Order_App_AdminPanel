@@ -13,6 +13,7 @@ import NavbarContainer from "~/layout/Navbar/NavbarContainer";
 import Category from "~/pages/newproducts/category";
 import Error from "~/pages/error/error";
 import { useEffect, useState } from "react";
+import DrawerDefault from "~/layout/Drawer/Drawer";
 
 function App() {
   const darkMode = localStorage.getItem("theme") === "dark";
@@ -43,13 +44,24 @@ function App() {
     }
   };
 
+  const [open, setOpen] = useState(false);
+
+  const handleopen = () => {
+    setOpen(!open);
+  };
+
   return (
     <div className="flex flex-row gap-[0] w-[100%] h-[100vh] dark:bg-bg-dark">
-      <div className="w-[20%] h-[100vh]">
+      <div className="w-[20%] h-[100vh] xl:block hidden">
         <Sidebar darkMode={darkMode} />
       </div>
+      <DrawerDefault open={open} handleopen={handleopen} />
       <div className="w-[100%] overflow-y-auto pb-[50px]">
-        <NavbarContainer changeTheme={changeTheme} darkMode={darkMode} />
+        <NavbarContainer
+          changeTheme={changeTheme}
+          handleopen={handleopen}
+          darkMode={darkMode}
+        />
         <Routes>
           <Route path="/" element={<Menu />} />
           <Route path="/admin" element={<Admin />} />

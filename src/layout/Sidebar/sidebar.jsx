@@ -25,7 +25,7 @@ import { NavLink } from "react-router-dom";
 import "../../App.css";
 import { Icon } from "@iconify/react";
 
-export default function Sidebar({darkMode}) {
+export default function Sidebar({ darkMode }) {
   const [open, setOpen] = useState(0);
 
   const handleOpen = (value) => {
@@ -35,12 +35,13 @@ export default function Sidebar({darkMode}) {
   return (
     <Card className="h-[100%] w-[100%] p-4 shadow-xl dark:bg-bg-dark shadow-blue-gray-900/5">
       <div className="mb-10 p-4 w-[180px] h-[60px]">
-        {
-          darkMode ? <img src="../img/logo2.svg" alt="" draggable="false" /> : <img src="../img/logo.svg" alt="" draggable="false" />
-        }
-        
+        {darkMode ? (
+          <img src="../img/logo2.svg" alt="" draggable="false" />
+        ) : (
+          <img src="../img/logo.svg" alt="" draggable="false" />
+        )}
       </div>
-      <List className="flex justify-between">
+      <List className="flex justify-between" ripple="light">
         <NavLink to="/">
           <ListItem className="focus:bg-transparent focus:text-white dark:text-white">
             <ListItemPrefix>
@@ -92,7 +93,10 @@ export default function Sidebar({darkMode}) {
               <ListItemPrefix>
                 <RectangleStackIcon className="h-5 w-5 dark:text-white" />
               </ListItemPrefix>
-              <Typography color="blue-gray" className="mr-auto font-normal dark:text-white">
+              <Typography
+                color="blue-gray"
+                className="mr-auto font-normal dark:text-white"
+              >
                 Products
               </Typography>
             </AccordionHeader>

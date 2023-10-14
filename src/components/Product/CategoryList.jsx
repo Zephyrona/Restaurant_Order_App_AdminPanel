@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import {
   Card,
@@ -12,14 +13,23 @@ import {
 } from "@material-tailwind/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Icon } from "@iconify/react";
+import { useState } from "react";
+import UpdateCategory from "~/components/Product/UpdateCategory";
 
 export default function CategoryList({
   tableHead,
   data,
+  setData,
   deleteCategory,
-  handleOpen,
-  open,
 }) {
+  const [editopen, setEditopen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const handleEditOpen = (category) => {
+    setSelectedCategory(category);
+    setEditopen(true);
+  };
+
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -94,7 +104,7 @@ export default function CategoryList({
                       <IconButton
                         variant="text"
                         className="text-md"
-                        onClick={() => handleOpen(item.id)}
+                        onClick={() => handleEditOpen(item)}
                       >
                         <Icon icon="material-symbols:edit" />
                       </IconButton>
@@ -117,7 +127,7 @@ export default function CategoryList({
           </tbody>
         </table>
       </CardBody>
-      <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+      {/* <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
         <Button variant="outlined" size="sm">
           Back
         </Button>
@@ -135,7 +145,14 @@ export default function CategoryList({
         <Button variant="outlined" size="sm">
           Next
         </Button>
-      </CardFooter>
+      </CardFooter> */}
+      <UpdateCategory
+        open={editopen}
+        handleOpen={() => setEditopen(false)}
+        selectedCategory={selectedCategory}
+        setData={setData}
+        data={data}
+      />
     </Card>
   );
 }

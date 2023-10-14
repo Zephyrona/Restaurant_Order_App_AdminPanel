@@ -28,7 +28,7 @@ export default function page() {
               <Typography color="text">Remember me</Typography>
             </div>
             <Button className="bg-primary" fullWidth>
-              <Link to="/chef ">Login</Link>
+              <Link to="/">Login</Link>
             </Button>
           </form>
         </div>

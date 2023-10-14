@@ -9,14 +9,19 @@ import {
 } from "@material-tailwind/react";
 
 export default function Cards({ label, img, price, description }) {
+
+  console.log(img);
+
   return (
     <Card className=" h-full w-full dark:bg-bg-grey ">
       <CardHeader shadow={false} floated={false} className="h-[250px] ">
         <img
-          src={img}
+          src={`http://165.227.138.148:8000/${img}`}
           alt="card-image"
           className="h-full w-full object-cover hover:scale-110 transition-all duration-300 ease-in-out"
         />
+        
+        
       </CardHeader>
       <CardBody>
         <div className="mb-2 flex items-center justify-between">

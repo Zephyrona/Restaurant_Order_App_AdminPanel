@@ -3,8 +3,6 @@ import { Typography, Button, Input, Spinner } from "@material-tailwind/react";
 import CategoryList from "~/components/Product/CategoryList";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import UpdateCategory from "~/components/Product/UpdateCategory";
-import { setDatasets } from "react-chartjs-2/dist/utils";
 
 export default function Category() {
   const tableHead = ["Category", "Description", "Edit", "Remove"];
@@ -16,15 +14,6 @@ export default function Category() {
 
   const handleOpen = () => setOpen(!open);
 
-  const [editopen, setEditopen] = useState(false);
-  const [openEditUserList, setOpenEditUserList] = useState([]);
-
-  const handleEditOpen = (id) => {
-    setEditopen(!editopen);
-    const editUserList = data.find((member) => member.id === id);
-    setOpenEditUserList(editUserList ? [editUserList] : []);
-  };
-
   useEffect(() => {
     axios
       .get("http://165.227.138.148:8000/api/Categories")
@@ -33,13 +22,14 @@ export default function Category() {
         setLoading(false);
       })
       .catch((error) => console.error(error));
-  }, [data]);
+  }, []);
 
   const deleteCategory = (id) => {
     axios
       .delete(`http://165.227.138.148:8000/api/Categories/${id}`)
       .then((response) => {
         console.log(response);
+        setData(data.filter(item => item.id !== id));
       })
       .catch((error) => console.error(error));
   };
@@ -55,6 +45,9 @@ export default function Category() {
       })
       .then((response) => {
         console.log(response);
+        setData([...data, response.data]);
+        setCategoryTitle("");
+        setCategoryDescription("");
       })
       .catch((error) => {
         console.error(error);
@@ -105,13 +98,13 @@ export default function Category() {
               tableHead={tableHead}
               deleteCategory={deleteCategory}
               data={data}
+              setData={setData}
               open={open}
               handleOpen={handleOpen}
             />
           </div>
         </div>
       )}
-      <UpdateCategory open={open} handleOpen={handleOpen} />
     </>
   );
 }

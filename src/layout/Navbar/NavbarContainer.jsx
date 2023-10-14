@@ -3,14 +3,17 @@ import { Navbar, IconButton } from "@material-tailwind/react";
 import ProfileMenu from "./ProfileMenu";
 import BreadCrumbs from "./BreadCrumbs";
 import AddToCardButton from "./AddToCardButton";
-import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
+import { Bars3BottomLeftIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 
-export default function NavbarContainer({ changeTheme, darkMode }) {
+export default function NavbarContainer({ changeTheme, darkMode, handleopen }) {
   return (
-    <Navbar className="w-[100%] border-0 p-2 rounded-none bg-white dark:bg-bg-dark shadow-blue-gray-900/5 mb-[30px]">
+    <Navbar className="w-[100%] z-50 border-0 p-2 rounded-none bg-white dark:bg-bg-dark shadow-blue-gray-900/5 mb-[30px]">
       <div className="flex items-center justify-between text-blue-gray-900 dark:text-white">
         <BreadCrumbs />
         <div className="flex items-center gap-[20px]">
+          <IconButton variant="text" onClick={handleopen} className="block xl:hidden">
+            <Bars3BottomLeftIcon className="h-[24px] w-[24px] text-text dark:text-white" />
+          </IconButton>
           <IconButton variant="text" onClick={changeTheme}>
             {darkMode ? (
               <MoonIcon className="h-[24px] w-[24px] text-text dark:text-white" />

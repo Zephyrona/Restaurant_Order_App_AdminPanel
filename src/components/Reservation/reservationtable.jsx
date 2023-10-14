@@ -4,21 +4,29 @@ import {
   Card,
   CardHeader,
   Typography,
-  Button,
   CardBody,
-  CardFooter,
   IconButton,
   Tooltip,
   Input,
 } from "@material-tailwind/react";
 import { Icon } from "@iconify/react";
+import ReservationEdit from "./reservationedit";
+import { useState } from "react";
 
 export default function ReservationList({
-  tablerows,
+  data,
   TABLE_HEAD,
-  handleDeteleReservation,
-  handleEditReservation,
+  deleteReservation,
+  setData
 }) {
+  const [editopen, setEditopen] = useState(false);
+  const [selectedReservation, setSelectedReservation] = useState(null);
+
+  const handleEditOpen = (category) => {
+    setSelectedReservation(category);
+    setEditopen(true);
+  };
+
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -62,21 +70,21 @@ export default function ReservationList({
             </tr>
           </thead>
           <tbody>
-            {tablerows.map(({ name, date, size }, index) => {
-              const isLast = index === tablerows.length - 1;
+            {data.map((item, index) => {
+              const isLast = index === data.length - 1;
               const classes = isLast
                 ? "p-4"
                 : "p-4 border-b border-blue-gray-50";
 
               return (
-                <tr key={index}>
+                <tr key={item.id}>
                   <td className={classes}>
                     <Typography
                       variant="small"
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {name}
+                      {item.name}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -85,7 +93,15 @@ export default function ReservationList({
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {date}
+                      {new Date(item.date).toLocaleDateString("en-US", {
+                        weekday: "short",
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "numeric",
+                        hour12: false,
+                      })}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -94,7 +110,7 @@ export default function ReservationList({
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {size}
+                      {item.numberOfPeople}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -102,7 +118,7 @@ export default function ReservationList({
                       <IconButton
                         variant="text"
                         className="text-md"
-                        onClick={() => handleEditReservation(index)}
+                        onClick={() => handleEditOpen(item)}
                       >
                         <Icon icon="material-symbols:edit" />
                       </IconButton>
@@ -113,7 +129,7 @@ export default function ReservationList({
                       <IconButton
                         variant="text"
                         className="text-md"
-                        onClick={() => handleDeteleReservation(index)}
+                        onClick={() => deleteReservation(item.id)}
                       >
                         <Icon icon="pajamas:remove" />
                       </IconButton>
@@ -125,25 +141,13 @@ export default function ReservationList({
           </tbody>
         </table>
       </CardBody>
-      <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-        <Button variant="outlined" size="sm">
-          Back
-        </Button>
-        <div className="flex items-center gap-2">
-          <IconButton variant="outlined" size="sm">
-            1
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            ...
-          </IconButton>
-          <IconButton variant="text" size="sm">
-            10
-          </IconButton>
-        </div>
-        <Button variant="outlined" size="sm">
-          Next
-        </Button>
-      </CardFooter>
+      <ReservationEdit
+        open={editopen}
+        handleOpen={() => setEditopen(false)}
+        selectedReservation={selectedReservation}
+        setData={setData}
+        data={data}
+      />
     </Card>
   );
 }
